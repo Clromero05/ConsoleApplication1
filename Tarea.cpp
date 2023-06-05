@@ -31,12 +31,13 @@ public:
 
     const T& operator[](int index) const
     {
-        return array[index]; // constante para los elementos 
+        return array[index]; // constante para los elementos
     }
 
     void Copy(const RawArray<T>& otherArray)
     {
-        for (int i = 0; i < length; i++)
+        int copyLength = otherArray.Length() < length ? otherArray.Length() : length;
+        for (int i = 0; i < copyLength; i++)
         {
             array[i] = otherArray[i]; // Copia los elemnetos desde otro RawArray al RawArray actual
         }
@@ -44,7 +45,8 @@ public:
 
     void Copy(const T sourceArray[], int sourceLength)
     {
-        for (int i = 0; i < length && i < sourceLength; i++)
+        int copyLength = sourceLength < length ? sourceLength : length;
+        for (int i = 0; i < copyLength; i++)
         {
             array[i] = sourceArray[i];
         }
@@ -55,18 +57,18 @@ int main()
 {
     RawArray<char> prueba(5); //crea una array con una longitud de 5
     RawArray<char> aCopiar(5);
-    char miArray[5] = { 'c', 'r', 'i', 's', 'A' }; //array de los elemenstos necesarios
+    char miArray[5] = { 'L', 'U', 'I', 'S', 'A' }; //array de los elemenstos necesarios
 
-    aCopiar.Copy(prueba); //copia los elementos de copia
+    aCopiar.Copy(prueba); //copia los elementos d copia
     prueba.Copy(miArray, 5); //copia los elementos de miArray
 
-    std::cout << "Elementos en el RawArray despus de copiar otro RawArray:" << std::endl;
+    std::cout << "Elementos en el RawArray después de copiar otro RawArray:" << std::endl;
     for (int i = 0; i < prueba.Length(); i++)
     {
         std::cout << prueba[i] << std::endl;
     }
 
-    std::cout << "Elementos en el RawArray despues de copiar un array de caracteres:" << std::endl;
+    std::cout << "Elementos en el RawArray después de copiar un array de caracteres:" << std::endl;
     for (int i = 0; i < prueba.Length(); i++)
     {
         std::cout << prueba[i] << std::endl;
